@@ -1,0 +1,23 @@
+---
+name: Checks
+
+on: [push] # Runs when we Push to Github
+
+# Ubuntu 20.04 comes with docker-compose by default. Hence why we did not install it.
+
+jobs:
+  test-lint:
+    name: Test and Lint
+    runs-on: ubuntu-20.04 # Specifies the O.S where this job will be run.
+    steps:
+      - name: Login to Docker Hub
+        users: docker/login-action@v1 # Logs in to Docker Hub
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Checkout
+        users: actions/checkout@v2 # Grants us access to the code we pushed
+      - name: Test
+        run: docker-compose run --rm app sh -c "python manage.py test" # Runs the unit tests
+      - name: Lint
+        run: docker-compose run --rm app sh -c "flake8" # Runs the linting tests
