@@ -352,7 +352,7 @@ class PrivateRecipeAPITests(TestCase):
         """Tests assigning an existing ingredient when updating a recipe.
         """
         ingredient1 = Ingredient.objects.create(user=self.user,
-                                               name='Pepper')
+                                                name='Pepper')
         recipe = create_recipe(user=self.user)
         recipe.ingredients.add(ingredient1)
 
@@ -365,7 +365,6 @@ class PrivateRecipeAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertIn(ingredient2, recipe.ingredients.all())
         self.assertNotIn(ingredient1, recipe.ingredients.all())
-
 
     def test_clear_recipe_ingredients(self):
         """Tests clearing a recipe's ingredients"""
