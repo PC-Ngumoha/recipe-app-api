@@ -130,7 +130,6 @@ class BaseRecipeAttrViewSet(mixins.ListModelMixin,
         ).order_by('-name').distinct()
 
 
-
 class TagViewSet(BaseRecipeAttrViewSet):
     """Manage tags in the database."""
     serializer_class = serializers.TagSerializer

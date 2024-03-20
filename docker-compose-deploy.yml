@@ -1,4 +1,3 @@
-# Docker compose file for deployment
 version: "3.9"
 
 services:
@@ -35,7 +34,7 @@ services:
     depends_on:
       - app
     ports:
-      - 8000:8000
+      - 80:8000
     volumes:
       - static-data:/vol/static
 
